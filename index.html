@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>চোর-বাবু-পুলিশ-ডাকাত</title>
+    <style>
+        *{padding: 0;
+        margin: 0;}
+        .player{
+            height: 160px;
+            width: 240px;
+            text-align: center;
+            border-radius: 30px;
+        }
+        .player1{
+            position: absolute;
+            background-color: rgb(6, 216, 6);
+        }
+        .player2{
+            position: absolute;
+            right: 1px;
+            background-color: rgb(29, 155, 252);
+        }
+        .player3{
+            position: absolute;
+            bottom: 1px;
+            background-color: rgb(255, 84, 17);
+        }
+        .player4{
+            position: absolute;
+            right: 1px;
+            bottom: 1px;
+            background-color: rgb(170, 249, 11);
+        }
+        .titleR{
+            position: relative;
+            top:35%;
+            left: 7px;
+            color: white;
+            font-size: 40px;
+        }
+        .random{
+            height: 150px;
+            width: 150px;
+            background-color: rgb(0, 98, 255);
+            position: absolute;
+            top: 42%;
+            left: 45%;
+            border-radius: 50%;
+        }
+        .point{
+            font-size: 40px;
+            color: white;
+        }
+        input{
+            font-size: 20px;
+            width: 70%;
+        }
+        .count{
+            background-color: orange;
+            border: 2px solid rgb(255, 149, 0);
+            font-size: 20px;
+            border-radius: 5px;
+        }
+        .take{
+            color: white;
+            background-color: rgb(51, 114, 240);
+            border:none;
+            border-radius: 10px;
+            font-size: 20px;
+            margin-right: 5px;
+            padding: 5px;
+        }
+        .open{
+            color: white;
+            background-color: rgb(8, 248, 144);
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            padding: 5px;
+            display: none;
+        }
+        p{
+            color: white;
+            font-size: 30px;
+        }
+        .coins{
+            position: relative;
+            left: 41.5%;
+            background-color:rgb(12, 83, 247);
+            height: 150px;
+            width: 200px;
+            padding: 20px;
+            border-radius: 30px;
+            color: rgb(135, 229, 239);
+        }
+        h2{
+            text-align: center;
+        }
+        @media screen and (max-width: 480px) {
+            .player{
+            height: 180px;
+            width: 150px;
+            text-align: center;
+            border-radius: 30px;
+            }
+            .random{
+            position: absolute;
+            top: 42%;
+            left: 35%;
+            }
+            .coins{
+                height: 95px;
+                width: 110px;
+                font-size: 12px;
+                position: relative;
+                left: 0px;
+                top: 185px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="player player1">
+        <span id="point1" class="point">00</span><br>
+        <input id="input1" type="number"><button onclick="count('input1','point1','take1','open1','ply-r1')" class="count">count</button>
+        <p id="ply-r1"><br>
+        <div class="btn"><button id="take1" onclick="take('ply-r1',0,'take1','open1')" class="take">Take</button><button id="open1" onclick="naw('ply-r1',0)" class="open">Open</button></div>
+    </div>
+    <div class="player player2">
+        <span id="point2" class="point">00</span><br>
+        <input id="input2" type="number"><button onclick="count('input2','point2','take2','open2','ply-r2')" class="count">count</button>
+        <p id="ply-r2"><br>
+        <div class="btn"><button id="take2" onclick="take('ply-r2',1,'take2','open2')" class="take">Take</button><button id="open2" onclick="naw('ply-r2',1)" class="open">Open</button></div>
+    </div>
+    <div id="random" onclick="random()" class="random">
+        <span class="titleR">Random</span>
+    </div>
+    <div class="player player3">
+        <span id="point3" class="point">00</span><br>
+        <input id="input3" type="number"><button onclick="count('input3','point3','take3','open3','ply-r3')" class="count">count</button>
+        <p id="ply-r3"></p><br>
+        <div class="btn"><button id="take3" onclick="take('ply-r3',2,'take3','open3')" class="take">Take</button><button id="open3" onclick="naw('ply-r3',2)" class="open">Open</button></div>
+    </div>
+    <div class="player player4">
+        <span id="point4" class="point">00</span><br>
+        <input id="input4" type="number"><button onclick="count('input4','point4','take4','open4','ply-r4')" class="count">count</button>
+        <p id="ply-r4"><br>
+        <div class="btn"><button id="take4" onclick="take('ply-r4',3,'take4','open4')" class="take">Take</button><button id="open4" onclick="naw('ply-r4',3)" class="open">Open</button></div>
+    </div>
+    <div class="coins">
+        <h2>Babu: 900৳</h2>
+        <h2>Police: 800৳</h2>
+        <h2>Dakat: 600৳</h2>
+        <h2>Cor: 450৳</h2>
+    </div>
+    <script>
+        function shuffleArray(array) {
+    
+            for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1)); // Generate random index
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements using destructuring assignment
+            }
+        }
+        let array1=["Dakat","Babu", "Police",  "Cor"];
+        // Example usage
+        const array = ["Babu", "Dakat", "Cor", "Police"];
+        function random() {
+            shuffleArray(array);
+        } 
+        function take(x,y,z,m) {
+            document.getElementById(z).style.display="none";
+            if (array[y]=='Cor' || array[y]=='Dakat') {
+                document.getElementById(m).style.display='block'; 
+            }
+            else{
+                document.getElementById(x).innerHTML=array[y];
+            }
+        } 
+        function naw(a,b) {
+            document.getElementById(a).innerHTML=array[b];
+        }
+        function count(k,l,m,n,p) {
+            document.getElementById(m).style.display='block';
+            let input=document.getElementById(k).value;
+            let Input=parseInt(input);
+            let point=document.getElementById(l).innerText;
+            let Point=parseInt(point);
+            document.getElementById(k).value="";
+            document.getElementById(l).innerText=Input+Point;
+            document.getElementById(n).style.display="none";
+            document.getElementById(p).innerHTML='';
+        }
+        
+            
+            
+            
+    </script>
+</body>
+</html>
